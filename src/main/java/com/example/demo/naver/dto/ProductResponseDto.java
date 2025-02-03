@@ -1,7 +1,6 @@
-package com.example.demo.dto;
+package com.example.demo.naver.dto;
 
 
-import com.example.demo.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

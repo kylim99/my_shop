@@ -3,7 +3,7 @@ package com.example.demo.naver.controller;
 
 import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
-import com.example.demo.dto.ProductResponseDto;
+import com.example.demo.naver.dto.ProductResponseDto;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -2,8 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
-import com.example.demo.entity.Product;
-import com.example.demo.dto.ProductResponseDto;
+import com.example.demo.naver.dto.Product;
+import com.example.demo.naver.dto.ProductResponseDto;
 import com.example.demo.naver.dto.ItemDto;
 import com.example.demo.repository.ProductRepository;
 import jakarta.transaction.Transactional;

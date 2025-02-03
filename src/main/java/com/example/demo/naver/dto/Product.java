@@ -1,8 +1,8 @@
-package com.example.demo.entity;
+package com.example.demo.naver.dto;
 
 import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
-import com.example.demo.naver.dto.ItemDto;
+import com.example.demo.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
