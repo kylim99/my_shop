@@ -1,4 +1,4 @@
-package com.example.demo.naver.dto;
+package com.example.demo.dto;
 
 
 import com.example.demo.entity.Product;
