@@ -5,8 +5,11 @@ import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
 import com.example.demo.dto.ProductResponseDto;
 import com.example.demo.service.ProductService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +28,12 @@ public class ProductController {
         System.out.println(id);
         return productService.updateProduct(id, requestDto);
     }
+
+    @GetMapping("/products")
+    public List<ProductResponseDto> getProduct(){
+        return productService.getProducts();
+    }
+
 
 
 }
