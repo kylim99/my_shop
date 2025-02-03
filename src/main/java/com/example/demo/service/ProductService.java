@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
+import com.example.demo.entity.User;
 import com.example.demo.naver.dto.Product;
 import com.example.demo.naver.dto.ProductResponseDto;
 import com.example.demo.naver.dto.ItemDto;
@@ -22,9 +23,9 @@ public class ProductService {
     public static final int MIN_MY_PRICE = 100;
 
 
-    public ProductResponseDto createProduct(ProductRequestDto requestDto) {
+    public ProductResponseDto createProduct(ProductRequestDto requestDto, User user) {
 
-        Product product = productRepository.save(new Product(requestDto));
+        Product product = productRepository.save(new Product(requestDto, user));
 
         return new ProductResponseDto(product);
     }
@@ -49,8 +50,8 @@ public class ProductService {
 
     }
 
-    public List<ProductResponseDto> getProducts() {
-        List<Product> productList = productRepository.findAll();
+    public List<ProductResponseDto> getProducts(User user) {
+        List<Product> productList = productRepository.findAllByUser(user);
         List<ProductResponseDto> responseDtoList = new ArrayList<>();
         for (Product product : productList) {
             responseDtoList.add(new ProductResponseDto((product)));
@@ -67,5 +68,15 @@ public class ProductService {
         );
 
         product.updateByItemDto(itemDto);
+    }
+
+    public List<ProductResponseDto> getAllProducts() {
+        List<Product> productList = productRepository.findAll();
+        List<ProductResponseDto> responseDtoList = new ArrayList<>();
+        for (Product product : productList) {
+            responseDtoList.add(new ProductResponseDto((product)));
+
+        }
+        return responseDtoList;
     }
 }
