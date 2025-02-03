@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
+import com.example.demo.naver.dto.ItemDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,5 +43,10 @@ public class Product extends Timestamped {
 
     public void update(ProductMypriceRequestDto requestDto) {
         this.myprice = requestDto.getMyprice();
+    }
+
+    public void updateByItemDto(ItemDto itemDto) {
+
+        this.lprice = itemDto.getLprice();
     }
 }
