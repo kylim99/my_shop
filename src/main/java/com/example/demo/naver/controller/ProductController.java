@@ -7,6 +7,7 @@ import com.example.demo.naver.dto.ProductResponseDto;
 import com.example.demo.security.UserDetailsImpl;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,14 +32,16 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<ProductResponseDto> getProduct(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return productService.getProducts(userDetails.getUser());
+    public Page<ProductResponseDto> getProduct(
+            @RequestParam("page") int page,
+            @RequestParam("page") int size,
+            @RequestParam("page") String sortBy,
+            @RequestParam("page") boolean isAsc,
+            @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+
+        return productService.getProducts(userDetails.getUser()
+            ,page-1,size,sortBy,isAsc
+        );
     }
-
-    @GetMapping("/admin/products")
-    public List<ProductResponseDto> getAllProducts(){
-        return productService.getAllProducts();
-    }
-
-
 }

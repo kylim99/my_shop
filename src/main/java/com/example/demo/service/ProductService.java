@@ -3,12 +3,17 @@ package com.example.demo.service;
 import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
 import com.example.demo.entity.User;
+import com.example.demo.entity.UserRoleEnum;
 import com.example.demo.naver.dto.Product;
 import com.example.demo.naver.dto.ProductResponseDto;
 import com.example.demo.naver.dto.ItemDto;
 import com.example.demo.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,14 +55,24 @@ public class ProductService {
 
     }
 
-    public List<ProductResponseDto> getProducts(User user) {
-        List<Product> productList = productRepository.findAllByUser(user);
-        List<ProductResponseDto> responseDtoList = new ArrayList<>();
-        for (Product product : productList) {
-            responseDtoList.add(new ProductResponseDto((product)));
+    public Page<ProductResponseDto> getProducts(User user, int page, int size, String sortBy, boolean isAsc) {
 
+        Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sort =  Sort.by(direction, sortBy);
+        Pageable pageable = PageRequest.of(page,size,sort);
+
+        UserRoleEnum userRoleEnum = user.getRole();
+
+        Page<Product> productList;
+
+        if(userRoleEnum == UserRoleEnum.USER){
+            productList  = (Page<Product>) productRepository.findAllByUser(user, pageable);
+        } else {
+            productList = productRepository.findAll(pageable);
         }
-        return responseDtoList;
+
+
+        return productList.map(ProductResponseDto::new);
     }
 
     @Transactional
@@ -70,13 +85,4 @@ public class ProductService {
         product.updateByItemDto(itemDto);
     }
 
-    public List<ProductResponseDto> getAllProducts() {
-        List<Product> productList = productRepository.findAll();
-        List<ProductResponseDto> responseDtoList = new ArrayList<>();
-        for (Product product : productList) {
-            responseDtoList.add(new ProductResponseDto((product)));
-
-        }
-        return responseDtoList;
-    }
 }
