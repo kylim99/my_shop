@@ -1,4 +1,4 @@
-package com.example.demo.naver.controller;
+package com.example.demo.controller;
 
 
 import com.example.demo.dto.ProductMypriceRequestDto;
@@ -32,9 +32,9 @@ public class ProductController {
     @GetMapping("/products")
     public Page<ProductResponseDto> getProduct(
             @RequestParam("page") int page,
-            @RequestParam("page") int size,
-            @RequestParam("page") String sortBy,
-            @RequestParam("page") boolean isAsc,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy,
+            @RequestParam("isAsc") boolean isAsc,
             @AuthenticationPrincipal UserDetailsImpl userDetails){
 
 
@@ -42,4 +42,37 @@ public class ProductController {
             ,page-1,size,sortBy,isAsc
         );
     }
+    @PostMapping("/products/{productId}/folder")
+    public void addFolder(
+            @PathVariable("productId") Long productId,
+            @RequestParam("folderId") Long folderId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails
+    ) throws IllegalAccessException {
+
+        System.out.println(productId);
+        System.out.println(folderId);
+        productService.addFolder(productId, folderId, userDetails.getUser());
+
+    }
+    @GetMapping("/folders/{folderId}/products")
+    public Page<ProductResponseDto> getProductInFolder(
+            @PathVariable("folderId") Long folderId,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy,
+            @RequestParam("isAsc") boolean isAsc,
+            @AuthenticationPrincipal UserDetailsImpl userDetails
+    ){
+        return productService.getProductInFolder(
+                folderId,
+                page - 1,
+                size,
+                sortBy,
+                isAsc,
+                userDetails.getUser()
+        );
+
+
+    }
+
 }

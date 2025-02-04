@@ -2,14 +2,13 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dto.FolderRequestDto;
+import com.example.demo.dto.FolderResponseDto;
 import com.example.demo.security.UserDetailsImpl;
 import com.example.demo.service.FolderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +25,11 @@ public class FolderController {
         List<String> folderNames = requestDto.getFolderNames();
         folderService.addFolders(folderNames,userDetails.getUser());
     }
+
+    @GetMapping("/folders")
+    public List<FolderResponseDto> getFolders(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return folderService.getFolders(userDetails.getUser());
+    }
+
+
 }
