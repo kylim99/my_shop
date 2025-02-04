@@ -3,7 +3,7 @@ package com.example.demo.util;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRoleEnum;
 import com.example.demo.naver.dto.ItemDto;
-import com.example.demo.naver.dto.Product;
+import com.example.demo.entity.Product;
 import com.example.demo.naver.service.NaverApiService;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;

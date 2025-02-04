@@ -3,15 +3,13 @@ package com.example.demo.naver.controller;
 
 import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
-import com.example.demo.naver.dto.ProductResponseDto;
+import com.example.demo.dto.ProductResponseDto;
 import com.example.demo.security.UserDetailsImpl;
 import com.example.demo.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

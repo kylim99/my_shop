@@ -4,8 +4,8 @@ import com.example.demo.dto.ProductMypriceRequestDto;
 import com.example.demo.dto.ProductRequestDto;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserRoleEnum;
-import com.example.demo.naver.dto.Product;
-import com.example.demo.naver.dto.ProductResponseDto;
+import com.example.demo.entity.Product;
+import com.example.demo.dto.ProductResponseDto;
 import com.example.demo.naver.dto.ItemDto;
 import com.example.demo.repository.ProductRepository;
 import jakarta.transaction.Transactional;
@@ -15,9 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
